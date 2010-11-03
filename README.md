@@ -49,6 +49,20 @@ invoked the same way as the `link_to` helper you already know and love:
       </ul>
     </nav>
 
+If your navigation items are more complex, use the block form of
+`nav_to`:
+
+    <nav>
+      <ul>
+        <%= nav_to 'People' do %>
+          <%# Inside the 'People' <li> %>
+        <% end %>
+        <%= nav_to 'Places', places_path %>
+        <%= nav_to 'Things', things_path %>
+      </ul>
+    </nav>
+
+
 Now, in each action template, just tell Goose where you are.
 
     <%= nav_at 'People' %>
