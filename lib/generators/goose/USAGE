@@ -1,0 +1,4 @@
+To copy a Goose initializer to your Rails App and create your
+app/views/nav directory, just do:
+
+    rails generate goose:install
