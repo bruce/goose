@@ -3,6 +3,7 @@ module Goose
   autoload :Config,  'goose/config'
   autoload :Helper,  'goose/helper'
   autoload :State,   'goose/state'
+  autoload :VERSION, 'goose/version'
 
   def self.config
     @config ||= Config.new

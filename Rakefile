@@ -1,51 +1,22 @@
 require 'rubygems'
 require 'rake'
-
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "goose"
-    gem.summary = %Q{Top Gun navigation for your Rails application}
-    gem.description = %Q{Flexible, simple support for multiple navigation views}
-    gem.email = "bruce@codefluency.com"
-    gem.homepage = "http://github.com/bruce/goose"
-    gem.authors = ["Bruce Williams"]
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: gem install jeweler"
-end
-
 require 'rake/testtask'
+
+$LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
+require "goose/version"
+
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
   test.pattern = 'test/**/test_*.rb'
   test.verbose = true
 end
-
-begin
-  require 'rcov/rcovtask'
-  Rcov::RcovTask.new do |test|
-    test.libs << 'test'
-    test.pattern = 'test/**/test_*.rb'
-    test.verbose = true
-  end
-rescue LoadError
-  task :rcov do
-    abort "RCov is not available. In order to run rcov, you must: sudo gem install spicycode-rcov"
-  end
+ 
+task :build do
+  system "gem build goose.gemspec"
 end
-
-task :test => :check_dependencies
+ 
+task :release => :build do
+  system "gem push goose-#{Goose::VERSION}"
+end
 
 task :default => :test
-
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "goose #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
