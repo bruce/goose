@@ -16,7 +16,7 @@ task :build do
 end
  
 task :release => :build do
-  system "gem push goose-#{Goose::VERSION}"
+  system "gem push goose-#{Goose::VERSION}.gem"
 end
 
 task :default => :test

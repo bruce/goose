@@ -7,18 +7,26 @@ module Goose
       @stack ||= []
     end
 
-    def render(nav, place)
-      at(nav, place) { @view.render(:partial => "nav/#{nav}") }
+    def render(nav, address)
+      at(nav, address) { @view.render(:partial => "nav/#{nav}") }
     end
 
     def at?(place)
-      @stack.last == place
+      current_address.at?(place)
+    end
+
+    def breadcrumbs
+      current_address.breadcrumbs
     end
 
     private
 
-    def at(nav, place, &block)
-      @stack << place
+    def current_address
+      @stack.last
+    end
+    
+    def at(nav, address, &block)
+      @stack << address
       result = yield
       @stack.pop
       result

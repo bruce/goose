@@ -1,5 +1,6 @@
 module Goose
 
+  autoload :Address, 'goose/address'
   autoload :Config,  'goose/config'
   autoload :Helper,  'goose/helper'
   autoload :State,   'goose/state'
@@ -11,11 +12,6 @@ module Goose
 
   def self.setup(&block)
     yield config
-  end
-
-  # Not recommended for production use.
-  def self.eject! #:nodoc:
-    raise NotImplementedError, "BOOM...Crunch"
   end
   
 end
