@@ -143,7 +143,7 @@ We'll make it a simple list that we can style later with CSS:
     <% end %>
 
 Remember, we need to tell the layout where to put the breadcrumbs.
-We just defined teh content for `:breadcrumbs`, so we'll add a
+We just defined the content for `:breadcrumbs`, so we'll add a
 matching `yield` to our `application.html.erb`:
 
     <%= yield :breadcrumbs %>
