@@ -166,4 +166,4 @@ See `config/initializers/goose.rb` for options.
 Copyright
 ---------
 
-Copyright (c) 2010 Bruce Williams. See LICENSE for details.
+Copyright (c) 2010-2011 Bruce Williams. See LICENSE for details.
