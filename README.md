@@ -148,7 +148,7 @@ matching `yield` to our `application.html.erb`:
 
     <%= yield :breadcrumbs %>
 
-If we run this and pull up the page in a brwoser, we'll notice that
+If we run this and pull up the page in a browser, we'll notice that
 only the `Places` breadcrumb is a link (it automatically picked it up
 from the `nav_to` in the main nav, handy!) -- if we want the other
 breadcrumbs to be linked (usually all but the last), we can pass the
