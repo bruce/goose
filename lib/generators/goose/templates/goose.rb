@@ -10,4 +10,7 @@ Goose.setup do |config|
   # Default options added to nav_to wrapper when not current location
   # config.inactive_options = {}
 
+  # Default method to create links in breadcrumbs
+  # config.breadcrumb_linker = lambda { |view, *args| view.link_to(*args) }
+  
 end

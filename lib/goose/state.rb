@@ -18,12 +18,12 @@ module Goose
     def breadcrumbs
       current_address.breadcrumbs
     end
-
-    private
-
+    
     def current_address
       @stack.last
     end
+
+    private
     
     def at(nav, address, &block)
       @stack << address

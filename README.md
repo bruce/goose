@@ -103,6 +103,61 @@ And use `yield` wherever it makes sense in your layout:
 
 It's that simple.
 
+Generating Breadcrumbs
+----------------------
+
+Let's say we had navigation that looked like:
+
+    <% content_for :main_navigation do %>
+      <nav>
+        <ul>
+          <%= nav_to 'People', people_path %>
+          <%= nav_to 'Places', places_path %>
+          <%= nav_to 'Things', things_path %>
+        </ul>
+      </nav>
+    <% end %>
+
+In our action templates, we would usually use `nav_at` to indicate the
+currently active navigation item:
+
+    <%= nav_at 'Places' %>
+
+We could give it even more detail if we'd like breadcrumbs.  In this
+example we're looking at a page for an arrondissement in Paris:
+
+    <%= nav_at 'Places', 'Paris', 'Enclos-St-Laurent' %>
+
+This `nav_at` invocation will still render the `main` partial in
+`app/views`, we just need to add a `content_for` for breadcrumbs.
+We'll make it a simple list that we can style later with CSS:
+
+    <% content_for :breadcrumbs do %>
+      <nav id='breadcrumbs'>
+        <ul>
+          <% breadcrumbs.each do |crumb| %>
+            <li><%= crumb %></li>
+          <% end %>
+        </ul>
+      </nav>
+    <% end %>
+
+Remember, we need to tell the layout where to put the breadcrumbs.
+We just defined teh content for `:breadcrumbs`, so we'll add a
+matching `yield` to our `application.html.erb`:
+
+    <%= yield :breadcrumbs %>
+
+If we run this and pull up the page in a brwoser, we'll notice that
+only the `Places` breadcrumb is a link (it automatically picked it up
+from the `nav_to` in the main nav, handy!) -- if we want the other
+breadcrumbs to be linked (usually all but the last), we can pass the
+URLs as well:
+
+    <%= nav_at 'Places', ['Paris', place_path(@paris)], 'Enclos-St-Laurent' %>
+
+Now both `Places` and `Paris` are linked.
+
 Customizing Goose
 -----------------
 

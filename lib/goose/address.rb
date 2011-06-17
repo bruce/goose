@@ -3,13 +3,21 @@ module Goose
   class Address
     include Enumerable
     
-    def initialize(head_name, *tail)
-      @head_name = head_name
+    def initialize(head, *tail)
+      if head.is_a?(Array)
+        @head = head
+      else
+        @head_name = head
+      end
       @tail = tail
     end
 
     def at?(head_name)
-      @head_name == head_name
+      if resolved?
+        @head.first == head_name
+      else
+        @head_name == head_name
+      end
     end
 
     def each(&block)
@@ -17,25 +25,19 @@ module Goose
     end
 
     def resolve(url)
-      @head_url = url
+      unless resolved?
+        @head = [@head_name, url]
+      end
     end
 
     private
 
     def list
-      [head, @tail]
+      @list ||= [@head, *@tail].compact
     end
 
-    def head
-      if resolved_head?
-        [@head_name, @head_url]
-      else
-        @head_name
-      end
-    end
-
-    def resolved_head?
-      @head_url
+    def resolved?
+      @head
     end
     
   end

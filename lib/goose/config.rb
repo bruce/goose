@@ -2,7 +2,7 @@ module Goose
 
   class Config
 
-    attr_writer :wrapper_tag, :active_options, :inactive_options
+    attr_writer :wrapper_tag, :active_options, :inactive_options, :breadcrumb_linker
 
     def wrapper_tag
       @wrapper_tag ||= :li
@@ -10,6 +10,10 @@ module Goose
 
     def active_options
       @active_options ||= {:class => 'active'}
+    end
+
+    def breadcrumb_linker
+      @breadcrumb_linker ||= lambda { |view, *args| view.link_to(*args) }
     end
 
     def inactive_options

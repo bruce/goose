@@ -29,7 +29,7 @@ module Goose
     def breadcrumbs
       goose.current_address.map do |crumb|
         if crumb.is_a?(Array)
-          link_to(*crumb)
+          Goose.config.breadcrumb_linker.call(self, *crumb)
         else
           crumb
         end
