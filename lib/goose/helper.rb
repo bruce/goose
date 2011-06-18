@@ -16,7 +16,7 @@ module Goose
     end
     
     def nav_at(*places)
-      options = places.last.is_a?(Hash) ? args.pop : {}
+      options = places.last.is_a?(Hash) ? places.pop : {}
       nav = options[:in] || :main
       address = Address.new(*places)
       goose.render(nav, address)
