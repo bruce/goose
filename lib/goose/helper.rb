@@ -11,8 +11,9 @@ module Goose
         goose.current_address.resolve(url)
         options.update(Goose.config.active_options)
       end
-      content = link_to(place, url) if url
-      content_tag(Goose.config.wrapper_tag, content, options, &block)
+      content = url ? link_to(place, url) : ''
+      content << capture(&block) if block
+      content_tag(Goose.config.wrapper_tag, content, options)
     end
     
     def nav_at(*places)
