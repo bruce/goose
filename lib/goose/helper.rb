@@ -9,7 +9,9 @@ module Goose
     def nav_to(place, url = nil, options = {}, &block)
       if goose.at?(place)
         goose.current_address.resolve(url)
-        options.update(Goose.config.active_options)
+        options.update(Goose.config.active_options) do |k,v1,v2|
+          k.to_s == 'class' ? "#{v1} #{v2}" : v2
+        end
       end
       content = url ? link_to(place, url) : ''.html_safe
       content << capture(&block) if block
