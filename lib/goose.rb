@@ -13,7 +13,17 @@ module Goose
   def self.setup(&block)
     yield config
   end
+
+  def self.wire!(rewire = false)
+    unless rewire
+      return if @wired
+    end
+    if defined?(ActionView::Base)
+      ActionView::Base.send(:include, Goose::Helper)
+    end
+    @wired = true
+  end
   
 end
 
-require 'goose/ext/action_view'
+Goose.wire!
