@@ -1,0 +1,12 @@
+<% content_for :main_navigation do %>
+  <nav>
+    <ul>
+      <%= nav_to 'Root', '/' %>
+      <%= nav_to 'One', '/#one' %>
+      <%= nav_to 'Two', '/#two' %>
+      <%= nav_to 'Three' do %>
+        <%= link_to 'Three', '/#three', class: 'custom-link-class' %>
+      <% end %>
+    </ul>
+  </nav>
+<% end %>
