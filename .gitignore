@@ -21,3 +21,9 @@ pkg
 ## PROJECT::SPECIFIC
 goose.gemspec
 *.gem
+doc/*
+.yardoc
+.bundle
+Gemfile.lock
+bin
+
