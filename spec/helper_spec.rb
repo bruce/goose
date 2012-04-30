@@ -17,6 +17,11 @@ describe Goose::Helper do
     rendered_nav.at('li.active').text.should == "One"
   end
 
+  it 'renders and applies active configuration to simple nav_to' do
+    @view.render(file: 'two')
+    rendered_nav.at('li.custom-wrapper-class.active').should_not be_nil
+  end
+
   it 'renders and applies active configuration to block nav_to' do
     @view.render(file: 'three')
     rendered_nav.at('li.active a.custom-link-class').text.should == "Three"
