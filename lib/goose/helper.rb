@@ -6,12 +6,12 @@ module Goose
       @goose ||= State.new(self)
     end
 
-    def nav_to(place, url, options = {}, &block)
+    def nav_to(place, url = nil, options = {}, &block)
       if goose.at?(place)
         goose.current_address.resolve(url)
         options.update(Goose.config.active_options)
       end
-      content = url ? link_to(place, url) : ''
+      content = url ? link_to(place, url) : ''.html_safe
       content << capture(&block) if block
       content_tag(Goose.config.wrapper_tag, content, options)
     end
